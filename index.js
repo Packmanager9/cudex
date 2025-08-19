@@ -186,7 +186,7 @@ class Game {
         }
     }
 }
-for (let t = 0; t < 10000; t++) { //535131 ++ is tournies
+for (let t = 0; t < 1000; t++) { //535131 ++ is tournies
     games.push(new Game())
 }
 wss.on("connection", ws => {
@@ -576,16 +576,16 @@ wss.on("connection", ws => {
     })
 })
 
-setInterval(function(){ 
-    for(let t = 0;t<tournaments.length;t++){
-        tournaments[t].sort()
-    }
- }, 10000);
+// setInterval(function(){ 
+//     for(let t = 0;t<tournaments.length;t++){
+//         tournaments[t].sort()
+//     }
+//  }, 100000);
 
- setInterval(function(){ 
-    for(let t = 0;t<tournaments.length;t++){
-        if(tournaments[t].unpaired%2 == 0 && tournaments[t].unpaired != 0){
-        tournaments[t].pair()
-        }
-    }
- }, 1000);
+//  setInterval(function(){ 
+//     for(let t = 0;t<tournaments.length;t++){
+//         if(tournaments[t].unpaired%2 == 0 && tournaments[t].unpaired != 0){
+//         tournaments[t].pair()
+//         }
+//     }
+//  }, 100000);
