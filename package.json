@@ -21,7 +21,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^34.0.1",
     "electron-package-manager": "^0.1.0",
     "umap-js": "^1.4.0"
   },
