@@ -3335,7 +3335,8 @@ let last = {}
     last.e = -1
 
     // let ws
-    let ws = new WebSocket("ws://localhost:3000");
+const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+const ws = new WebSocket(`${protocol}://${window.location.host}/path-if-any`);
     let playerID = -1 //Math.floor(Math.random()*2)
 
 Socketize(ws)
