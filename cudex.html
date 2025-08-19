@@ -3366,6 +3366,7 @@ function Socketize(ws) {
         if (parsed.tile > -1) {
             console.log('Updating board');
             grid.apply(parsed.board);
+            grid.turn*=-1
             // stoneclick.play();
         } 
         // Handle room list
