@@ -186,7 +186,7 @@ class Game {
         }
     }
 }
-for (let t = 0; t < 565131; t++) { //535131 ++ is tournies
+for (let t = 0; t < 10000; t++) { //535131 ++ is tournies
     games.push(new Game())
 }
 wss.on("connection", ws => {
