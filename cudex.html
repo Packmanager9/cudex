@@ -1151,8 +1151,12 @@ window.addEventListener("pointerdown", e => {
                     hit.selected = 0
                     grid.turn*=-1 
                     let mes = grid.printSelf()
-                    ws.send((mes))
-                    board.apply(mes)
+                    let data = {}
+                    data.board = mes
+                    data.tile  = 1
+                    console.log(data)
+                    ws.send(JSON.stringify(data))
+                    grid.apply(mes)
                     }
                 }
             }
@@ -1167,8 +1171,12 @@ window.addEventListener("pointerdown", e => {
                     hit.selected = 0
                     grid.turn*=-1
                     let mes = grid.printSelf()
-                    ws.send((mes))
-                    board.apply(mes)
+                    let data = {}
+                    data.board = mes
+                    data.tile  = 1
+                    console.log(data)
+                    ws.send(JSON.stringify(data))
+                    grid.apply(mes)
                     }
                 }
             }
@@ -1877,11 +1885,11 @@ function intersects(a,b,c,d,p,q,r,s) {
 
     let cs = []
 
-for (let t = 1; t < 30; t++) {
-    const ing = new Image()
-    ing.src = `guy${t}.png`
-    cs.push(ing)
-}
+// for (let t = 1; t < 30; t++) {
+//     const ing = new Image()
+//     ing.src = `guy${t}.png`
+//     cs.push(ing)
+// }
 const angles = [
     -2.356194490192345,   // top-left (0,0)
     -1.5707963267948966,  // top-middle (0,1)
@@ -3334,36 +3342,42 @@ Socketize(ws)
 
 
 let newboard = 0
-    function Socketize(ws) {
+function Socketize(ws) {
+    ws.addEventListener("message", (event) => {
+        let raw = event.data;
 
-        // ////console.log("0hit")
+        // Strip "Echo: " prefix if present
+        if (raw.startsWith("Echo: ")) {
+            raw = raw.replace(/^Echo:\s*/, '');
+        }
 
-        // ////console.log("hit")
-        ws.addEventListener("message", ({
-            data
-        }) => {
+        let parsed;
+        try {
+            parsed = JSON.parse(raw);
+        } catch (e) {
+            console.error("Invalid JSON received:", raw);
+            return;
+        }
 
-            // ////console.log(data)
-            if (JSON.parse(data).faction) {
-                // playerID = Math.abs(JSON.parse(data).faction)
-                // ////console.log(playerID)
-            } else if (JSON.parse(data).tile > -1) {
+        console.log(parsed);
 
-                grid.apply(JSON.parse(data).tile.board)
-                // stoneclick.play()
-            } else {
-                // ////console.log(JSON.parse(data))
-                if (JSON.parse(data).roomlist) {
-                    roomslist = JSON.parse(data).roomlist
-                } else {
-
-                    let rect = new Rectangle(10, 10, 20, 20, "#00FF00")
-                    rect.draw()
-                }
-            }
-        })
-
-    }
+        // Handle board update
+        if (parsed.tile > -1) {
+            console.log('Updating board');
+            grid.apply(parsed.board);
+            // stoneclick.play();
+        } 
+        // Handle room list
+        else if (parsed.roomlist) {
+            roomslist = parsed.roomlist;
+        } 
+        // Fallback example drawing
+        else {
+            let rect = new Rectangle(10, 10, 20, 20, "#00FF00");
+            rect.draw();
+        }
+    });
+}
 
 </script>
 
