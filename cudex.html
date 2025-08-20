@@ -1075,7 +1075,7 @@ window.addEventListener("pointerdown", e => {
     TIP_engine.y = YS_engine
     TIP_engine.body = TIP_engine
 
-    const hit = grid.isPointInside(TIP_engine, 5); // 12px tolerance
+    const hit = grid.isPointInside(TIP_engine, 7); // 12px tolerance
     
     // if(hit.type == 0 ){
     //     return
@@ -1145,10 +1145,134 @@ window.addEventListener("pointerdown", e => {
                 if(d.type > 0 && hit.type != d.type){
     
                     if((x == d.k && ( y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y ==d.t || x == d.k))){
-                    hit.type  =d.type
-                    d.type = 0 
+              
+                        if(d.subtype == 2){
+
+                            if(hit.type > 0){
+    let k1 = hit.k
+    let t1 = hit.t
+    let e1 = hit.e
+
+
+
+    hit.type = 0
+    hit.subtype = 0
+hit.selected = 0
+
+for (let dk = -1; dk <= 1; dk++) {
+for (let dt = -1; dt <= 1; dt++) {
+for (let de = -1; de <= 1; de++) {
+let k = k1 + dk;
+let t = t1 + dt;
+let e = e1 + de;
+
+// Check bounds to avoid errors
+if (
+k >= 0 && k < grid.grid.length &&
+t >= 0 && t < grid.grid[k].length &&
+e >= 0 && e < grid.grid[k][t].length
+) {
+let node = grid.grid[k][t][e];
+if(node.type != d.type){
+node.type = hit.type;
+node.subtype = hit.subtype;
+node.selected = hit.selected;
+
+node.blasted = 25
+}
+}
+}
+}
+}
+
+
+
+hit.type  =d.type
+                                            hit.subtype  =d.subtype
+                                            hit.selected = 0
+                                            d.type = 0 
+                                            d.subtype = 0 
+                    d.selected = 0
+
+
+
+}else{
+
+    hit.type  =d.type
+                                            hit.subtype  =d.subtype
+                                            d.type = 0 
+                                            d.subtype = 0 
                     d.selected = 0
                     hit.selected = 0
+}
+
+
+}else   if(d.subtype == 3 && hit.subtype == 2){
+    return
+}else   if(d.subtype == 3){
+                            let kd = d.k-hit.k
+                            let td = d.t-hit.t
+                            let ed = d.e-hit.e
+
+                            console.log(td)
+                            if(kd != 0){
+                                for(let w = hit.k;w<d.k;w++){
+                                    if(grid.grid[w][d.t][d.e].type  < 1){
+                                        grid.grid[w][d.t][d.e].type = Math.max(d.type, d.type)
+                                    grid.grid[w][d.t][d.e].subtype = 1
+                                    }
+                                }
+                                for(let w = d.k;w<hit.k;w++){
+                                    if(grid.grid[w][d.t][d.e].type  < 1){
+                                    grid.grid[w][d.t][d.e].type = Math.max(d.type, d.type)
+                                    grid.grid[w][d.t][d.e].subtype = 1
+                                    }
+                                }
+                            }else if(td != 0){
+                                for(let w = hit.t;w<d.t;w++){
+                                    if(grid.grid[d.k][w][d.e].type  < 1){
+                                    grid.grid[d.k][w][d.e].type = Math.max(d.type, d.type)
+                                    grid.grid[d.k][w][d.e].subtype = 1
+                                    }
+                                }
+                                for(let w = d.t;w<hit.t;w++){
+                                    if(grid.grid[d.k][w][d.e].type  < 1){
+                                    grid.grid[d.k][w][d.e].type = Math.max(d.type, d.type)
+                                    grid.grid[d.k][w][d.e].subtype = 1
+                                    }
+                                }
+                            }else if(ed != 0){
+                                console.log(ed)
+                                for(let w = hit.e;w<d.e;w++){
+                                    if(grid.grid[d.k][d.t][w].type  < 1){
+                                    grid.grid[d.k][d.t][w].type = Math.max(d.type, d.type)
+                                    grid.grid[d.k][d.t][w].subtype = 1
+                                    }
+                                }
+                                for(let w = d.e;w<hit.e;w++){
+                                    if(grid.grid[d.k][d.t][w].type  < 1){
+                                    grid.grid[d.k][d.t][w].type = Math.max(d.type, d.type)
+                                    grid.grid[d.k][d.t][w].subtype = 1
+                                    }
+                                }
+                            }
+
+                    hit.type  =d.type
+                    d.subtype = 3
+                    hit.subtype  =d.subtype
+                    hit.selected = 0
+
+
+                        }else{
+
+                            hit.type  =d.type
+                                            hit.subtype  =d.subtype
+                                            d.type = 0 
+                                            d.subtype = 0 
+                    d.selected = 0
+                    hit.selected = 0
+
+                        }
                     grid.turn*=-1 
                     let mes = grid.printSelf()
                     let data = {}
@@ -1165,11 +1289,150 @@ window.addEventListener("pointerdown", e => {
                 if(d.type > 0 && hit.type != d.type){
     
                     if((x == d.k && ( y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y ==d.t || x == d.k))){
-                    hit.type  =d.type
-                    d.type = 0 
+
+
+                     
+                        if(d.subtype == 2){
+
+if(hit.type > 0){
+    let k1 = hit.k
+    let t1 = hit.t
+    let e1 = hit.e
+
+
+
+    hit.type = 0
+    hit.subtype = 0
+hit.selected = 0
+
+for (let dk = -1; dk <= 1; dk++) {
+for (let dt = -1; dt <= 1; dt++) {
+for (let de = -1; de <= 1; de++) {
+let k = k1 + dk;
+let t = t1 + dt;
+let e = e1 + de;
+
+// Check bounds to avoid errors
+if (
+k >= 0 && k < grid.grid.length &&
+t >= 0 && t < grid.grid[k].length &&
+e >= 0 && e < grid.grid[k][t].length
+) {
+let node = grid.grid[k][t][e];
+if(node.type != d.type){
+node.type = hit.type;
+node.subtype = hit.subtype;
+node.selected = hit.selected;
+node.blasted = 25
+}
+}
+}
+}
+}
+
+
+
+hit.type  =d.type
+                                            hit.subtype  =d.subtype
+                                            hit.selected = 0
+                                            d.type = 0 
+                                            d.subtype = 0 
+                    d.selected = 0
+
+
+
+}else{
+
+    hit.type  =d.type
+                                            hit.subtype  =d.subtype
+                                            d.type = 0 
+                                            d.subtype = 0 
                     d.selected = 0
                     hit.selected = 0
-                    grid.turn*=-1
+
+}
+
+
+
+}else   if(d.subtype == 3 && hit.subtype == 2){
+}else   if(d.subtype == 3){
+                            let kd = d.k-hit.k
+                            let td = d.t-hit.t
+                            let ed = d.e-hit.e
+
+                            console.log(td)
+                            if(kd != 0){
+                                for(let w = hit.k;w<d.k;w++){
+                                    if(grid.grid[w][d.t][d.e].type  < 1){
+                                        grid.grid[w][d.t][d.e].type = Math.max(d.type, d.type)
+                                    grid.grid[w][d.t][d.e].subtype = 1
+                                    }
+                                }
+                                for(let w = d.k;w<hit.k;w++){
+                                    if(grid.grid[w][d.t][d.e].type  < 1){
+                                    grid.grid[w][d.t][d.e].type = Math.max(d.type, d.type)
+                                    grid.grid[w][d.t][d.e].subtype = 1
+                                    }
+                                }
+                            }else if(td != 0){
+                                for(let w = hit.t;w<d.t;w++){
+                                    if(grid.grid[d.k][w][d.e].type  < 1){
+                                    grid.grid[d.k][w][d.e].type = Math.max(d.type, d.type)
+                                    grid.grid[d.k][w][d.e].subtype = 1
+                                    }
+                                }
+                                for(let w = d.t;w<hit.t;w++){
+                                    if(grid.grid[d.k][w][d.e].type  < 1){
+                                    grid.grid[d.k][w][d.e].type = Math.max(d.type, d.type)
+                                    grid.grid[d.k][w][d.e].subtype = 1
+                                    }
+                                }
+                            }else if(ed != 0){
+                                console.log(ed)
+                                for(let w = hit.e;w<d.e;w++){
+                                    if(grid.grid[d.k][d.t][w].type  < 1){
+                                    grid.grid[d.k][d.t][w].type = Math.max(d.type, d.type)
+                                    grid.grid[d.k][d.t][w].subtype = 1
+                                    }
+                                }
+                                for(let w = d.e;w<hit.e;w++){
+                                    if(grid.grid[d.k][d.t][w].type  < 1){
+                                    grid.grid[d.k][d.t][w].type = Math.max(d.type, d.type)
+                                    grid.grid[d.k][d.t][w].subtype = 1
+                                    }
+                                }
+                            }
+
+                    hit.type  =d.type
+                    d.subtype = 3
+                    hit.subtype  =d.subtype
+                    hit.selected = 0
+
+
+                        }else{
+
+                            hit.type  =d.type
+                                            hit.subtype  =d.subtype
+                                            d.type = 0 
+                                            d.subtype = 0 
+                    d.selected = 0
+                    hit.selected = 0
+
+                        }
+
+                        if(d.subtype == 3 && hit.subtype == 2){
+                            d.selected = 0
+                            hit.selected = 0
+                        return
+                        }else{
+
+                            if(d.subtype == 3 && hit.subtype == 2){
+                            d.selected = 0
+                            hit.selected = 0
+                        return
+                        }else{
+
+                            grid.turn*=-1
                     let mes = grid.printSelf()
                     let data = {}
                     data.board = mes
@@ -1177,6 +1440,12 @@ window.addEventListener("pointerdown", e => {
                     console.log(data)
                     ws.send(JSON.stringify(data))
                     grid.apply(mes)
+
+                        }
+                        }
+
+
+                    
                     }
                 }
             }
@@ -1229,7 +1498,7 @@ window.addEventListener("pointerup", e => {
             TIP_engine.y = YS_engine
             TIP_engine.body = TIP_engine
 
-     grid.hover(TIP_engine, 5); // 12px tolerance
+     grid.hover(TIP_engine, 7); // 12px tolerance
         }
     }
     function gamepad_control(object, speed = 1) { // basic control for objects using the controler
@@ -2262,6 +2531,7 @@ const angles = [
           this.data = {}; // arbitrary storage
           this.grid = null; // set when added to a Grid4D
           this.type = -1
+          this.subtype = -1
           this.stype = -1
         //   if(Math.random() < .01){
         //     this.stype = Math.floor(Math.random()*3)
@@ -2514,11 +2784,31 @@ const angles = [
                             t:t+half,
                             e:e+half,
                         };
+                        point.blasted = -1
+                        point.type = -1
                         if(k < 0 && t < 0 && e < 0){
                             point.type = 1
+                            point.subtype = 1
+                            if(k < -1 && t < -1 && e < -1){
+                                point.type = 1
+                                point.subtype = 2
+                                if(k < -2 && t < -2 && e < -2){
+                                    point.type = 1
+                                    point.subtype = 3
+                                }
+                            }
                         }
                         if(k > -1 && t > -1 && e > -1){
                             point.type = 2
+                            point.subtype = 1
+                            if(k > 0 && t > 0 && e > 0){
+                                point.type = 2
+                                point.subtype = 2
+                                if(k > 1 && t > 1 && e > 1){
+                                    point.type = 2
+                                    point.subtype = 3
+                                }
+                            }
                         }
                         point.color = `rgb(${point.r}, ${point.g}, ${point.b})`
                         this.dots.push(point);
@@ -2584,8 +2874,10 @@ const angles = [
                 return {
                     sx, sy,
                     // color: `rgb(${d.r},${d.g},${d.b})`,
-                    z: d.z,
-type: d.type
+                    blasted: d.blasted,
+  z: d.z,
+type: d.type,
+subtype: d.subtype
                 };
             });
         }
@@ -2596,6 +2888,7 @@ type: d.type
             let y = -1
             let z = -1
             this.dots.map(d => {
+                d.blasted--
 
                 if(d.selected == 1){
 
@@ -2625,25 +2918,31 @@ type: d.type
 
                         return {
                             sx, sy,
-                            color: `rgb(${255},${0},${0})`,
-                            z: d.z,
-type: d.type
+                            color: `rgb(${255},${0},${100})`,
+                            blasted: d.blasted,
+  z: d.z,
+type: d.type,
+subtype: d.subtype
                         };
                     }else  if(d.type == 2){
 
                         return {
                             sx, sy,
                             color: `rgb(${0},${255},${0})`,
-                            z: d.z,
-type: d.type
+                            blasted: d.blasted,
+  z: d.z,
+type: d.type,
+subtype: d.subtype
                         };
                     }else{
 
                     return {
                         sx, sy,
                         color: `rgb(${0},${0},${0})`,
-                        z: d.z,
-type: d.type
+                        blasted: d.blasted,
+  z: d.z,
+type: d.type,
+subtype: d.subtype
                     };
                     }
                 }else{
@@ -2655,9 +2954,11 @@ type: d.type
                         return {
                             sx, sy,
                             color: `rgb(${255-(128*Math.cos(time))},${128+(128*Math.cos(time))},${128+(128*Math.sin(time))})`,
-                            z: d.z,
+                            blasted: d.blasted,
+  z: d.z,
                             flash: 1,
-    type: d.type
+    type: d.type,
+subtype: d.subtype
                         };
 
                     }else{
@@ -2665,19 +2966,43 @@ type: d.type
 
                 if(d.type == 1){
 
-                    return {
-                        sx, sy,
-                        color: `rgb(${200+(d.z*32)},${0},${200+(d.z*32)})`,
-                        z: d.z,
-type: d.type
-                    };
+                    if(d.subtype == 1){
+
+return {
+sx, sy,
+color: `rgb(${250+(d.z*32)},${0},${200+(d.z*32)})`,
+z: d.z,
+type: d.type,
+subtype: d.subtype
+};
+}else if (d.subtype == 2){
+
+return {
+sx, sy,
+color: `rgb(${200+(d.z*32)},${50},${150+(d.z*32)})`,
+z: d.z,
+type: d.type,
+subtype: d.subtype
+};
+}else if (d.subtype == 3){
+
+return {
+sx, sy,
+color: `rgb(${200+(d.z*32)},${100},${100+(d.z*32)})`,
+z: d.z,
+type: d.type,
+subtype: d.subtype
+};
+}
                 }else  if(d.type == 2){
 
                     return {
                         sx, sy,
                         color: `rgb(${200+(d.z*32)},${200+(d.z*32)},${0})`,
-                        z: d.z,
-type: d.type
+                        blasted: d.blasted,
+  z: d.z,
+type: d.type,
+subtype: d.subtype
                     };
                 }
                     }
@@ -2689,26 +3014,53 @@ type: d.type
              
                 if(d.type == 1){
 
-                    return {
-                        sx, sy,
-                        color: `rgb(${200+(d.z*32)},${0},${200+(d.z*32)})`,
-                        z: d.z,
-type: d.type
-                    };
+
+                    if(d.subtype == 1){
+
+return {
+sx, sy,
+color: `rgb(${250+(d.z*32)},${0},${200+(d.z*32)})`,
+z: d.z,
+type: d.type,
+subtype: d.subtype
+};
+}else if (d.subtype == 2){
+
+return {
+sx, sy,
+color: `rgb(${200+(d.z*32)},${50},${150+(d.z*32)})`,
+z: d.z,
+type: d.type,
+subtype: d.subtype
+};
+}else if (d.subtype == 3){
+
+return {
+sx, sy,
+color: `rgb(${200+(d.z*32)},${100},${100+(d.z*32)})`,
+z: d.z,
+type: d.type,
+subtype: d.subtype
+};
+}
                 }else  if(d.type == 2){
 
                     return {
                         sx, sy,
                         color: `rgb(${200+(d.z*32)},${200+(d.z*32)},${0})`,
-                        z: d.z,
-type: d.type
+                        blasted: d.blasted,
+  z: d.z,
+type: d.type,
+subtype: d.subtype
                     };
                 }else{
                     return {
                         sx, sy,
                         color: `rgb(${128+(d.z*128)},${128+(d.z*128)},${128+(d.z*128)})`,
-                        z: d.z,
-type: d.type
+                        blasted: d.blasted,
+  z: d.z,
+type: d.type,
+subtype: d.subtype
                     };
                 }
                 }
@@ -2720,7 +3072,8 @@ type: d.type
             x: d.x, y: d.y, z: d.z,
             r: d.r, g: d.g, b: d.b,
             k: d.k, t: d.t, e: d.e,
-            type: d.type ?? null,
+            type: d.type,
+subtype: d.subtype ?? null,
             selected: d.selected ?? 0
         }));
         return JSON.stringify({ dots: dotsData });
@@ -2745,6 +3098,7 @@ type: d.type
             this.dots[i].t = d.t;
             this.dots[i].e = d.e;
             this.dots[i].type = d.type;
+            this.dots[i].subtype = d.subtype;
             this.dots[i].selected = d.selected;
             this.dots[i].color = `rgb(${d.r}, ${d.g}, ${d.b})`;
         }
@@ -2839,9 +3193,12 @@ Flex3DObject.prototype.draw = function(ctx, opts = {}) {
 
     for (let p of dots2d) {
         canvas_context.beginPath();
-        if(p.type != 1 && p.type != 2){
+        if(p.type != 1 && p.type != 2){ 
 
-            if(p.flash == 1){
+            if(p.blasted >= 1){
+
+                canvas_context.arc(p.sx, p.sy, ((radius+(p.z/3))/3)+(p.blasted/4), 0, Math.PI * 2);
+            }else if(p.flash == 1){
 
                 canvas_context.arc(p.sx, p.sy, ((radius+(p.z/3))/3)+1, 0, Math.PI * 2);
             }else{
@@ -2850,9 +3207,22 @@ Flex3DObject.prototype.draw = function(ctx, opts = {}) {
             }
         }else{
 
-        canvas_context.arc(p.sx, p.sy, (radius+p.z)/.8, 0, Math.PI * 2);
+            if(p.subtype == 1){
+                canvas_context.arc(p.sx, p.sy, (radius+p.z)/.8, 0, Math.PI * 2);
+            }else if(p.subtype == 2){
+                let poly = new Polygon(p.sx, p.sy, (radius+(p.z/2))/.5, p.color, 3, 0, 0, ((time)*Math.PI*2)/10)
+                poly.draw()
+            }else if(p.subtype == 3){
+                let poly = new Polygon(p.sx, p.sy, (radius+(p.z/2))/.5, p.color, 5, 0, 0, -((time)*Math.PI*2)/10)
+                poly.draw()
+            }
         }
         canvas_context.fillStyle = p.color;
+        if(p.blasted >= 1){
+            canvas_context.fillStyle = blastcolors[p.blasted];
+         
+            
+        }
         canvas_context.fill();
     }
 };
@@ -2860,13 +3230,49 @@ Flex3DObject.prototype.draw = function(ctx, opts = {}) {
 
 let orth = false
 
-let grid = new Flex3DObject(5)
+let grid = new Flex3DObject(7)
 let time =0 
 let turnjack = 0
 let turnjack2 = 0
 let turned2 = 0
 let turned = 0
 
+const blastcolors = [
+  // White to Yellow
+  "#FFFFFF", // white
+  "#FFFFCC",
+  "#FFFF99",
+  "#FFFF66",
+  "#FFFF33",
+  "#FFFF00", // yellow
+
+  // Yellow to Orange
+  "#FFEA00",
+  "#FFD400",
+  "#FFBF00",
+  "#FFA500", // orange
+
+  // Orange to Red
+  "#FF8C00",
+  "#FF6600",
+  "#FF3300",
+  "#FF1900",
+  "#FF0000", // red
+
+  // Red (darkening)
+  "#E00000",
+  "#C00000",
+  "#A00000",
+  "#800000",
+  "#600000",
+
+  // Fade to black (last 5)
+  "#400000",
+  "#300000",
+  "#200000",
+  "#100000",
+  "#000000"
+];
 
     function main() {
         time+=.25
@@ -2959,7 +3365,9 @@ let turned = 0
                             
                                             if((x == d.k && ( y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y ==d.t || x == d.k))){
                                             hit.type  =d.type
+                                            hit.subtype  =d.subtype
                                             d.type = 0 
+                                            d.subtype = 0 
                                             d.selected = 0
                                             hit.selected = 0
                                             grid.turn*=-1
@@ -2972,7 +3380,9 @@ let turned = 0
                             
                                             if((x == d.k && ( y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y ==d.t || x == d.k))){
                                             hit.type  =d.type
+                                            hit.subtype  =d.subtype
                                             d.type = 0 
+                                            d.subtype = 0 
                                             d.selected = 0
                                             hit.selected = 0
                                             grid.turn*=-1
@@ -3078,7 +3488,9 @@ let turned = 0
                             
                                             if((x == d.k && ( y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y ==d.t || x == d.k))){
                                             hit.type  =d.type
+                                            hit.subtype  =d.subtype
                                             d.type = 0 
+                                            d.subtype = 0 
                                             d.selected = 0
                                             hit.selected = 0
                                             grid.turn*=-1
@@ -3091,7 +3503,9 @@ let turned = 0
                             
                                             if((x == d.k && ( y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y ==d.t || x == d.k))){
                                             hit.type  =d.type
+                                            hit.subtype  =d.subtype
                                             d.type = 0 
+                                            d.subtype = 0 
                                             d.selected = 0
                                             hit.selected = 0
                                             grid.turn*=-1
@@ -3153,7 +3567,9 @@ let turned = 0
                             
                                             if((x == d.k && ( y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y ==d.t || x == d.k))){
                                             hit.type  =d.type
+                                            hit.subtype  =d.subtype
                                             d.type = 0 
+                                            d.subtype = 0 
                                             d.selected = 0
                                             hit.selected = 0
                                             grid.turn*=-1
@@ -3166,7 +3582,9 @@ let turned = 0
                             
                                             if((x == d.k && ( y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y ==d.t || x == d.k))){
                                             hit.type  =d.type
+                                            hit.subtype  =d.subtype
                                             d.type = 0 
+                                            d.subtype = 0 
                                             d.selected = 0
                                             hit.selected = 0
                                             grid.turn*=-1
@@ -3272,7 +3690,9 @@ let turned = 0
                             
                                             if((x == d.k && ( y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y ==d.t || x == d.k))){
                                             hit.type  =d.type
+                                            hit.subtype  =d.subtype
                                             d.type = 0 
+                                            d.subtype = 0 
                                             d.selected = 0
                                             hit.selected = 0
                                             grid.turn*=-1
@@ -3285,7 +3705,9 @@ let turned = 0
                             
                                             if((x == d.k && ( y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y ==d.t || x == d.k))){
                                             hit.type  =d.type
+                                            hit.subtype  =d.subtype
                                             d.type = 0 
+                                            d.subtype = 0 
                                             d.selected = 0
                                             hit.selected = 0
                                             grid.turn*=-1
