@@ -2514,10 +2514,10 @@ const angles = [
                             t:t+half,
                             e:e+half,
                         };
-                        if(k < -1 && t < -1 && e < -1){
+                        if(k < 0 && t < 0 && e < 0){
                             point.type = 1
                         }
-                        if(k > 0 && t > 0 && e > 0){
+                        if(k > -1 && t > -1 && e > -1){
                             point.type = 2
                         }
                         point.color = `rgb(${point.r}, ${point.g}, ${point.b})`
@@ -2860,7 +2860,7 @@ Flex3DObject.prototype.draw = function(ctx, opts = {}) {
 
 let orth = false
 
-let grid = new Flex3DObject(9)
+let grid = new Flex3DObject(5)
 let time =0 
 let turnjack = 0
 let turnjack2 = 0
