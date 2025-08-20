@@ -3653,11 +3653,14 @@ let globalRoom = Math.floor(Math.random() * 9999)
             canvas_context.font = "20px arial"
             canvas_context.fillStyle = "white"
             canvas_context.fillText("Type in a number and press the button to select a room", 100, 100)
-            canvas_context.fillText("The first player in the room plays as black and goes first", 100, 150)
+            canvas_context.fillText("Magenta goes first", 100, 150)
             canvas_context.fillText("Room: " + this.number, 100, 200)
             canvas_context.fillText("Press Backspace to reset room number", 100, 250)
+            canvas_context.fillText("Units move in straight lines.", 100, 290)
+            canvas_context.fillText("Circles and triangles can capture, triangles detonate", 100, 330)
+            canvas_context.fillText("Hexagons leave a trail of circles and duplicate as they move", 100, 370)
 
-            canvas_context.fillText("Active rooms", 100, 400)
+            canvas_context.fillText("Active rooms:", 100, 410)
             goRect.draw()
             // ////console.log(roomslist)
             for (let t = 0; t < roomslist.length; t++) {
@@ -3665,7 +3668,7 @@ let globalRoom = Math.floor(Math.random() * 9999)
                 canvas_context.fillStyle = "white"
                 if (roomslist[t][0] != 0) {
 
-                    canvas_context.fillText("Room: " + roomslist[t][0] + "     " + roomslist[t][1] + '/' + '2', 100, 420 + (t * 22))
+                    canvas_context.fillText("Room: " + roomslist[t][0] + "     " + roomslist[t][1] + '/' + '2', 100, 430 + (t * 22))
                 }
 
             }
