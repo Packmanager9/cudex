@@ -1076,6 +1076,9 @@ function setUp(canvas_pass, style = "#000000") {
         TIP_engine.y = YS_engine
         TIP_engine.body = TIP_engine
 
+        if(goRect.isPointInside(TIP_engine)){
+            startgame = 1
+        }
         const hit = grid.isPointInside(TIP_engine, 7); // 12px tolerance
 
         // if(hit.type == 0 ){
@@ -3464,7 +3467,239 @@ const blastcolors = [
     "#000000"
 ];
 
+
+let globalRoom = Math.floor(Math.random() * 9999)
+    // let b = new Board()
+    let startgame = 0
+
+    let goRect = new Rectangle(500, 500, 100, 100, "#00ff00")
+
+    class Numbox {
+        constructor() {
+            this.number = globalRoom
+            this.pressed = 0
+        }
+        draw() {
+            // ////console.log(keysPressed)
+            if (this.number < 999) {
+                if (keysPressed['1']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                    }
+                    this.number = parseInt(this.number + `1`, 10)
+                    keysPressed['1'] = false
+                }
+                if (keysPressed['2']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                    }
+                    this.number = parseInt(this.number + `2`, 10)
+                    keysPressed['2'] = false
+                }
+                if (keysPressed['3']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                    }
+                    this.number = parseInt(this.number + `3`, 10)
+                    keysPressed['3'] = false
+                }
+                if (keysPressed['4']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                    }
+                    this.number = parseInt(this.number + `4`, 10)
+                    keysPressed['4'] = false
+                }
+                if (keysPressed['5']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                    }
+                    this.number = parseInt(this.number + `5`, 10)
+                    keysPressed['5'] = false
+                }
+                if (keysPressed['6']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                    }
+                    this.number = parseInt(this.number + `6`, 10)
+                    keysPressed['6'] = false
+                }
+                if (keysPressed['7']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                    }
+                    this.number = parseInt(this.number + `7`, 10)
+                    keysPressed['7'] = false
+                }
+                if (keysPressed['8']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                    }
+                    this.number = parseInt(this.number + `8`, 10)
+                    keysPressed['8'] = false
+                }
+                if (keysPressed['9']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                    }
+                    this.number = parseInt(this.number + `9`, 10)
+                    keysPressed['9'] = false
+                }
+                if (keysPressed['0']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                    }
+                    this.number = parseInt(this.number + `0`, 10)
+                    keysPressed['0'] = false
+                }
+            } else {
+                if (keysPressed['1']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                        this.number = parseInt(this.number + `1`, 10)
+                        keysPressed['1'] = false
+                    }
+                }
+                if (keysPressed['2']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                        this.number = parseInt(this.number + `2`, 10)
+                        keysPressed['2'] = false
+                    }
+                }
+                if (keysPressed['3']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                        this.number = parseInt(this.number + `3`, 10)
+                        keysPressed['3'] = false
+                    }
+                }
+                if (keysPressed['4']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                        this.number = parseInt(this.number + `4`, 10)
+                        keysPressed['4'] = false
+                    }
+                }
+                if (keysPressed['5']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                        this.number = parseInt(this.number + `5`, 10)
+                        keysPressed['5'] = false
+                    }
+                }
+                if (keysPressed['6']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                        this.number = parseInt(this.number + `6`, 10)
+                        keysPressed['6'] = false
+                    }
+                }
+                if (keysPressed['7']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                        this.number = parseInt(this.number + `7`, 10)
+                        keysPressed['7'] = false
+                    }
+                }
+                if (keysPressed['8']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                        this.number = parseInt(this.number + `8`, 10)
+                        keysPressed['8'] = false
+                    }
+                }
+                if (keysPressed['9']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                        this.number = parseInt(this.number + `9`, 10)
+                        keysPressed['9'] = false
+                    }
+                }
+                if (keysPressed['0']) {
+                    if (this.pressed == 0) {
+                        this.pressed = 1
+                        this.number = 0
+                        this.number = parseInt(this.number + `0`, 10)
+                        keysPressed['0'] = false
+                    }
+                }
+
+            }
+            if (keysPressed['Backspace']) {
+                this.number = 0
+            }
+            canvas_context.clearRect(0,0,700,700)
+            canvas_context.font = "20px arial"
+            canvas_context.fillStyle = "white"
+            canvas_context.fillText("Type in a number and press the button to select a room", 100, 100)
+            canvas_context.fillText("The first player in the room plays as black and goes first", 100, 150)
+            canvas_context.fillText("Room: " + this.number, 100, 200)
+            canvas_context.fillText("Press Backspace to reset room number", 100, 250)
+
+            canvas_context.fillText("Active rooms", 100, 400)
+            goRect.draw()
+            // ////console.log(roomslist)
+            for (let t = 0; t < roomslist.length; t++) {
+                canvas_context.font = "20px arial"
+                canvas_context.fillStyle = "white"
+                if (roomslist[t][0] != 0) {
+
+                    canvas_context.fillText("Room: " + roomslist[t][0] + "     " + roomslist[t][1] + '/' + '2', 100, 420 + (t * 22))
+                }
+
+            }
+
+            if (Math.random() < .1) {
+
+                let pson = {}
+                pson.queryTournament = 1
+
+                ws.send(JSON.stringify(pson))
+            }
+
+        }
+    }
+
+
+
+
+
+let roombox = new Numbox()
+
+
 function main() {
+
+    if(startgame == 1){
+
+    }else{
+        roombox.draw()
+        canvas_context.fillStyle = 'white'
+        canvas_context.strokeStyle = 'Black'
+        canvas_context.font = '30px arial'
+        canvas_context.fillText(`Room: ${globalRoom}`, 20, 40)
+        canvas_context.strokeText(`Room: ${globalRoom}`, 20, 40)
+        return
+    }
     time += .25
 
     canvas_context.clearRect(0, 0, canvas.width, canvas.height)
