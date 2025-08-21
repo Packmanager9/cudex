@@ -3715,8 +3715,13 @@ function main() {
     canvas_context.clearRect(0, 0, canvas.width, canvas.height)
 
 
-    grid.draw()
-    canvas_context.clearRect(0, 0, canvas.width, canvas.height);
+    // grid.draw()
+    // canvas_context.clearRect(0, 0, canvas.width, canvas.height);
+
+
+    canvas_context.fillText("Room: " + roombox.number, 500, 40)
+
+
     grid.draw(canvas_context, {
         orth: false,
         scale: 120,
@@ -4185,6 +4190,11 @@ function main() {
 
     grid.hover(TIP_engine)
 
+                    if (Math.random() < .1) {
+                        let pson = {}
+                        pson.pinging = 1
+                        ws.send(JSON.stringify(pson))
+                    }
 
 }
 
