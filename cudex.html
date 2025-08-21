@@ -3688,6 +3688,7 @@ let globalRoom = Math.floor(Math.random() * 9999)
 
                 let pson = {}
                 pson.pinging = 1
+                pson.room = roombox.number
 
                 ws.send(JSON.stringify(pson))
             }
@@ -4251,8 +4252,10 @@ function Socketize(ws) {
         }
         // Fallback example drawing
         else {
-            let rect = new Rectangle(10, 10, 20, 20, "#00FF00");
+            if(parsed.room == roombox.number || parsed.room == globalRoom){
+                let rect = new Rectangle(0, 0, 20, 20, "#00FF00");
             rect.draw();
+            }
         }
     });
 }
