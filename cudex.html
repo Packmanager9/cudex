@@ -3697,6 +3697,14 @@ let indicator = 0
 
 
 function main() {
+            if (Math.random() < .1) {
+
+                let pson = {}
+                pson.queryTournament = 1
+
+                ws.send(JSON.stringify(pson))
+            }
+
 
     if(startgame == 1){
 
