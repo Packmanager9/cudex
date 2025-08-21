@@ -3701,6 +3701,8 @@ let globalRoom = Math.floor(Math.random() * 9999)
 
 let roombox = new Numbox()
 
+let indicator = 0
+
 
 function main() {
 
@@ -4189,8 +4191,9 @@ function main() {
     }
 
     grid.hover(TIP_engine)
-
-                    if (Math.random() < .1) {
+    indicator++
+                    if (indicator > 4) {
+                        indicator = 0
                         let pson = {}
                         pson.pinging = 1
                         ws.send(JSON.stringify(pson))
