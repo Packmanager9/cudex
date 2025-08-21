@@ -186,7 +186,7 @@ class Game {
         }
     }
 }
-for (let t = 0; t < 1000; t++) { //535131 ++ is tournies
+for (let t = 0; t < 10000; t++) { //535131 ++ is tournies
     games.push(new Game())
 }
 wss.on("connection", ws => {
@@ -453,6 +453,7 @@ wss.on("connection", ws => {
             // }
             sjon.ping = parseInt(JSON.parse(data).ping)
             sjon.serverID = JSON.parse(data).serverID
+            sjon.room = ws.assigned
             for (let t = 0; t < games[ws.assigned].players.length; t++) {
                 if (t != games[ws.assigned].players.indexOf(ws)) {
                 games[ws.assigned].players[t].send(JSON.stringify(sjon))
