@@ -3700,8 +3700,13 @@ function main() {
 
     if(startgame == 1){
 
+
     }else{
         roombox.draw()
+
+        let pson = {}
+        pson.room = roombox.number
+        ws.send(JSON.stringify(pson))
         return
     }
     time += .25
@@ -4244,7 +4249,7 @@ function Socketize(ws) {
         // Fallback example drawing
         else {
             if(parsed.room == roombox.number || parsed.room == globalRoom){
-                let rect = new Rectangle(0, 0, 20, 20, "#00FF00");
+                let rect = new Rectangle(0, 0, 20, 20, "#00FF00"); 
             rect.draw();
             }
         }
