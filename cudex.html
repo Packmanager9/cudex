@@ -1156,6 +1156,7 @@ function setUp(canvas_pass, style = "#000000") {
             let z = hit.e
             let y = hit.t
 
+            let glob = 1
             grid.dots.map(d => {
                 if (grid.turn == -1 && d.type == 1) {
                     if (d.selected == 2) {
@@ -1164,7 +1165,14 @@ function setUp(canvas_pass, style = "#000000") {
 
                             if ((x == d.k && (y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y == d.t || x == d.k))) {
 
+                                let dx = Math.abs(x - d.k);
+                                let dy = Math.abs(y - d.t);
+                                let dz = Math.abs(z - d.e);
+
                                 if (d.subtype == 2) {
+                            if ((dx + dy + dz) <= 3) {
+                                glob = 1
+    
 
                                     if (hit.type > 0) {
                                         let k1 = hit.k
@@ -1225,6 +1233,11 @@ function setUp(canvas_pass, style = "#000000") {
                                     }
 
 
+    
+                                }else{
+                                    
+                                glob = 0
+                                }
                                 } else if (d.subtype == 3 && (hit.subtype > 0)) {
                                     console.log(hit)
                                 } else if (d.subtype == 3) {
@@ -1283,12 +1296,21 @@ function setUp(canvas_pass, style = "#000000") {
 
                                 } else {
 
-                                    hit.type = d.type
+                                    if(d.subtype == 1){
+                                        let dx = Math.abs(x - d.k);
+                                let dy = Math.abs(y - d.t);
+                                let dz = Math.abs(z - d.e);
+
+                            if ((dx + dy + dz) <= 3) {
+                                hit.type = d.type
                                     hit.subtype = d.subtype
                                     d.type = 0
                                     d.subtype = 0
                                     d.selected = 0
                                     hit.selected = 0
+
+                            }
+                                    }
 
                                 }
 
@@ -1317,7 +1339,11 @@ return
 }
 
 
-                                } else  {
+                                }else if(glob == 0){
+
+                                d.selected = 0
+                                hit.selected = 0
+                                }  else  {
 
                                     grid.turn *= -1
                                     let mes = grid.printSelf()
@@ -1338,8 +1364,14 @@ return
 
                             if ((x == d.k && (y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y == d.t || x == d.k))) {
 
+                                let dx = Math.abs(x - d.k);
+                                let dy = Math.abs(y - d.t);
+                                let dz = Math.abs(z - d.e);
 
                                 if (d.subtype == 2) {
+                            if ((dx + dy + dz) <= 3) {
+                                glob = 1
+
 
                                     if (hit.type > 0) {
                                         let k1 = hit.k
@@ -1399,7 +1431,9 @@ return
 
                                     }
 
-
+                                }else{
+                                    glob = 0
+                                }
 
                                 } else if (d.subtype == 3 && (hit.subtype > 0)) {
 
@@ -1492,7 +1526,11 @@ return
                                     return
 
                                     }
-                                } else {
+                                }else if(glob == 0){
+
+                                    d.selected = 0
+                                    hit.selected = 0
+                                }else {
                                     
 
                                     grid.turn *= -1
@@ -3003,6 +3041,7 @@ class Flex3DObject {
         let x = -1
         let y = -1
         let z = -1
+        let st = -1
         this.dots.map(d => {
             d.blasted--
 
@@ -3013,6 +3052,7 @@ class Flex3DObject {
                 z = d.e
 
 
+                st=d.subtype
 
             }
 
@@ -3069,6 +3109,27 @@ class Flex3DObject {
                 if (((x == d.k && (y == d.t || z == d.e)) || (y == d.t && (x == d.k || z == d.e)) || (z == d.e && (y == d.t || x == d.k)))) {
 
                     if (d.type != 1 && d.type != 2) {
+                                let dx = Math.abs(x - d.k);
+                                let dy = Math.abs(y - d.t);
+                                let dz = Math.abs(z - d.e);
+
+                                if (st == 2) {
+                            if ((dx + dy + dz) <= 3) {
+
+                                return {
+                            sx,
+                            sy,
+                            color: `rgb(${255-(128*Math.cos(time))},${128+(128*Math.cos(time))},${128+(128*Math.sin(time))})`,
+                            blasted: d.blasted,
+                            z: d.z,
+                            flash: 1,
+                            type: d.type,
+                            subtype: d.subtype
+                        };
+                            }
+                        }else  if (st == 1) {
+
+                            if ((dx + dy + dz) <= 2) {
 
                         return {
                             sx,
@@ -3080,6 +3141,22 @@ class Flex3DObject {
                             type: d.type,
                             subtype: d.subtype
                         };
+                    }
+                        }else{
+
+                        return {
+                            sx,
+                            sy,
+                            color: `rgb(${255-(128*Math.cos(time))},${128+(128*Math.cos(time))},${128+(128*Math.sin(time))})`,
+                            blasted: d.blasted,
+                            z: d.z,
+                            flash: 1,
+                            type: d.type,
+                            subtype: d.subtype
+                        };
+                        }
+
+
 
                     } else {
 
