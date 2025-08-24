@@ -1091,7 +1091,9 @@ function setUp(canvas_pass, style = "#000000") {
             startgame = 1
         }
         const hit = grid.isPointInside(TIP_engine, 7); // 12px tolerance
+      
 
+        let sr = 0
         // if(hit.type == 0 ){
         //     return
         // }
@@ -1128,12 +1130,17 @@ function setUp(canvas_pass, style = "#000000") {
             let sup = 0
             grid.dots.map(d => {
                 if (d.selected == 1) {
-
+                    sr = 1
                     d.selected = 2
                     sup = 1
                 } else {
 
+                    if(hit.type <1 ){
+
+                }else{
                     d.selected = -1
+
+                }
                 }
             })
 
@@ -1146,7 +1153,9 @@ function setUp(canvas_pass, style = "#000000") {
 
 
         if (hit) {
-            
+            if(hit.type <1 && sr==0){
+                return
+            }
             selected = hit;
             console.log("Selected point:", hit);
             hit.selected = 1
@@ -3029,7 +3038,10 @@ class Flex3DObject {
                 sy,
                 // color: `rgb(${d.r},${d.g},${d.b})`,
                 blasted: d.blasted,
-                z: d.z,
+                 z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                 type: d.type,
                 subtype: d.subtype
             };
@@ -3077,7 +3089,10 @@ class Flex3DObject {
                         sy,
                         color: `rgb(${255},${0},${100})`,
                         blasted: d.blasted,
-                        z: d.z,
+                         z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                         type: d.type,
                         subtype: d.subtype
                     };
@@ -3088,7 +3103,10 @@ class Flex3DObject {
                         sy,
                         color: `rgb(${0},${255},${0})`,
                         blasted: d.blasted,
-                        z: d.z,
+                         z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                         type: d.type,
                         subtype: d.subtype
                     };
@@ -3099,7 +3117,10 @@ class Flex3DObject {
                         sy,
                         color: `rgb(${0},${0},${0})`,
                         blasted: d.blasted,
-                        z: d.z,
+                         z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                         type: d.type,
                         subtype: d.subtype
                     };
@@ -3121,7 +3142,10 @@ class Flex3DObject {
                             sy,
                             color: `rgb(${255-(128*Math.cos(time))},${128+(128*Math.cos(time))},${128+(128*Math.sin(time))})`,
                             blasted: d.blasted,
-                            z: d.z,
+                             z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                             flash: 1,
                             type: d.type,
                             subtype: d.subtype
@@ -3136,7 +3160,10 @@ class Flex3DObject {
                             sy,
                             color: `rgb(${255-(128*Math.cos(time))},${128+(128*Math.cos(time))},${128+(128*Math.sin(time))})`,
                             blasted: d.blasted,
-                            z: d.z,
+                             z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                             flash: 1,
                             type: d.type,
                             subtype: d.subtype
@@ -3149,7 +3176,10 @@ class Flex3DObject {
                             sy,
                             color: `rgb(${255-(128*Math.cos(time))},${128+(128*Math.cos(time))},${128+(128*Math.sin(time))})`,
                             blasted: d.blasted,
-                            z: d.z,
+                             z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                             flash: 1,
                             type: d.type,
                             subtype: d.subtype
@@ -3169,17 +3199,24 @@ class Flex3DObject {
                                     sx,
                                     sy,
                                     color: `rgb(${250+(d.z*32)},${0},${200+(d.z*32)})`,
-                                    z: d.z,
+                                     z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                                     type: d.type,
                                     subtype: d.subtype
                                 };
+                                
                             } else if (d.subtype == 2) {
 
                                 return {
                                     sx,
                                     sy,
                                     color: `rgb(${200+(d.z*32)},${50},${150+(d.z*32)})`,
-                                    z: d.z,
+                                     z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                                     type: d.type,
                                     subtype: d.subtype
                                 };
@@ -3189,7 +3226,10 @@ class Flex3DObject {
                                     sx,
                                     sy,
                                     color: `rgb(${200+(d.z*32)},${100},${100+(d.z*32)})`,
-                                    z: d.z,
+                                     z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                                     type: d.type,
                                     subtype: d.subtype
                                 };
@@ -3203,7 +3243,10 @@ class Flex3DObject {
                                     sy,
                                     color: `rgb(${190+(d.z*32)},${190+(d.z*32)},${0})`,
                                     blasted: d.blasted,
-                                    z: d.z,
+                                     z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                                     type: d.type,
                                     subtype: d.subtype
                                 };
@@ -3215,7 +3258,10 @@ class Flex3DObject {
                                     sy,
                                     color: `rgb(${190+(d.z*32)},${190+(d.z*32)},${50})`,
                                     blasted: d.blasted,
-                                    z: d.z,
+                                     z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                                     type: d.type,
                                     subtype: d.subtype
                                 };
@@ -3228,7 +3274,10 @@ class Flex3DObject {
                                     sy,
                                     color: `rgb(${190+(d.z*32)},${190+(d.z*32)},${100})`,
                                     blasted: d.blasted,
-                                    z: d.z,
+                                     z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                                     type: d.type,
                                     subtype: d.subtype
                                 };
@@ -3251,7 +3300,10 @@ class Flex3DObject {
                             sx,
                             sy,
                             color: `rgb(${250+(d.z*32)},${0},${200+(d.z*32)})`,
-                            z: d.z,
+                             z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                             type: d.type,
                             subtype: d.subtype
                         };
@@ -3261,7 +3313,10 @@ class Flex3DObject {
                             sx,
                             sy,
                             color: `rgb(${200+(d.z*32)},${50},${150+(d.z*32)})`,
-                            z: d.z,
+                             z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                             type: d.type,
                             subtype: d.subtype
                         };
@@ -3271,7 +3326,10 @@ class Flex3DObject {
                             sx,
                             sy,
                             color: `rgb(${200+(d.z*32)},${100},${100+(d.z*32)})`,
-                            z: d.z,
+                             z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                             type: d.type,
                             subtype: d.subtype
                         };
@@ -3285,7 +3343,10 @@ class Flex3DObject {
                             sy,
                             color: `rgb(${190+(d.z*32)},${190+(d.z*32)},${0})`,
                             blasted: d.blasted,
-                            z: d.z,
+                             z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                             type: d.type,
                             subtype: d.subtype
                         };
@@ -3297,7 +3358,10 @@ class Flex3DObject {
                             sy,
                             color: `rgb(${190+(d.z*32)},${190+(d.z*32)},${50})`,
                             blasted: d.blasted,
-                            z: d.z,
+                             z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                             type: d.type,
                             subtype: d.subtype
                         };
@@ -3310,7 +3374,10 @@ class Flex3DObject {
                             sy,
                             color: `rgb(${190+(d.z*32)},${190+(d.z*32)},${100})`,
                             blasted: d.blasted,
-                            z: d.z,
+                             z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                             type: d.type,
                             subtype: d.subtype
                         };
@@ -3319,9 +3386,12 @@ class Flex3DObject {
                     return {
                         sx,
                         sy,
-                        color: `rgb(${128+(d.z*128)},${128+(d.z*128)},${128+(d.z*128)})`,
+                        color: `rgb(${128+(d.k*(128/3))},${128+(d.t*(128/3))},${128+(d.e*(128/3))})`,
                         blasted: d.blasted,
-                        z: d.z,
+                         z: d.z,
+  k: d.k,
+  e: d.e,
+  t: d.t,
                         type: d.type,
                         subtype: d.subtype
                     };
@@ -3334,7 +3404,7 @@ class Flex3DObject {
         const dotsData = this.dots.map(d => ({
             x: d.x,
             y: d.y,
-            z: d.z,
+             z: d.z,
             r: d.r,
             g: d.g,
             b: d.b,
@@ -3464,7 +3534,7 @@ Flex3DObject.prototype.draw = function(ctx, opts = {}) {
     } = opts;
 
     for (let t = 0; t < this.links.length; t++) {
-        this.links[t].draw()
+        // this.links[t].draw()
     }
     // Project into 2D space
     let dots2d = this.recolor(orth, scale, offset);
@@ -3472,21 +3542,164 @@ Flex3DObject.prototype.draw = function(ctx, opts = {}) {
     // Depth sort (draw farthest first)
     dots2d.sort((a, b) => a.z - b.z);
 
-    for (let p of dots2d) {
+    let pr = {}
+
+    for (let p of this.dots) {
+
+
+        if(p.selected == 1){
+            pr = p
+        }
+    }
+
+    if(pr.k > -1000){
+
+        // console.log(pr)
+        for (let p of dots2d) {
         canvas_context.beginPath();
         if (p.type != 1 && p.type != 2) {
 
             if (p.blasted >= 1) {
 
-                canvas_context.arc(p.sx, p.sy, ((radius + (p.z / 3)) / 3) + (p.blasted / 4), 0, Math.PI * 2);
+                canvas_context.arc(p.sx, p.sy, ((radius + (p.z / 3)) / 3) + (p.blasted / 3.5), 0, Math.PI * 2);
             } else if (p.flash == 1) {
 
-                canvas_context.arc(p.sx, p.sy, ((radius + (p.z / 3)) / 3) + 1, 0, Math.PI * 2);
+                canvas_context.arc(p.sx, p.sy, ((radius + (p.z / 3)) / 3) + 2, 0, Math.PI * 2);
             } else {
 
-                canvas_context.arc(p.sx, p.sy, (radius + (p.z / 3)) / 3, 0, Math.PI * 2);
+                canvas_context.arc(p.sx, p.sy, (radius + (p.z / 3)) / 4, 0, Math.PI * 2);
             }
         } else {
+
+
+            if(pr.type != p.type){
+                    if(pr.subtype == 2){
+                                let dx = Math.abs(pr.k - p.k);
+                                let dy = Math.abs(pr.t - p.t);
+                                let dz = Math.abs(pr.e - p.e);
+                                let x = pr.k
+                                let y = pr.t
+                                let z = pr.e
+                            // if (p.subtype == 2) {
+                                if (((dx + dy + dz) <= 3)  && ((x == p.k && (y == p.t || z == p.e)) || (y == p.t && (x == p.k || z == p.e)) || (z == p.e && (y == p.t || x == p.k)))) {
+                                    
+                 p.color =    `rgb(${255-(128*Math.sin(time))},${128+(128*Math.cos(time))},${128+(128*Math.cos(time))})`
+            if (p.subtype == 1) {
+                canvas_context.arc(p.sx, p.sy, (radius + p.z) / .8, 0, Math.PI * 2);
+            } else if (p.subtype == 2) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 3, 0, 0, ((time) * Math.PI * 2) / 10)
+                poly.draw()
+            } else if (p.subtype == 3) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 6, 0, 0, -((time) * Math.PI * 2) / 10)
+                poly.draw()
+            }
+
+                            }else{
+                        if (p.subtype == 1) {
+                canvas_context.arc(p.sx, p.sy, (radius + p.z) / .8, 0, Math.PI * 2);
+            } else if (p.subtype == 2) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 3, 0, 0, ((time) * Math.PI * 2) / 10)
+                poly.draw()
+            } else if (p.subtype == 3) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 6, 0, 0, -((time) * Math.PI * 2) / 10)
+                poly.draw()
+            }
+        }
+
+                        // }
+                    }else if(pr.subtype == 1){
+                                let dx = Math.abs(pr.k - p.k);
+                                let dy = Math.abs(pr.t - p.t);
+                                let dz = Math.abs(pr.e - p.e);
+
+                                let x = pr.k
+                                let y = pr.t
+                                let z = pr.e
+                            // if (p.subtype == 2) {
+                                if (((dx + dy + dz) <= 2)  && ((x == p.k && (y == p.t || z == p.e)) || (y == p.t && (x == p.k || z == p.e)) || (z == p.e && (y == p.t || x == p.k)))) {
+                            // console.log(dx,dy,dz,pr,p, (dx + dy + dz))
+                 p.color =    `rgb(${255-(128*Math.sin(time))},${128+(128*Math.cos(time))},${128+(128*Math.cos(time))})`
+                
+            if (p.subtype == 1) {
+                canvas_context.arc(p.sx, p.sy, (radius + p.z) / .8, 0, Math.PI * 2);
+            } else if (p.subtype == 2) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 3, 0, 0, ((time) * Math.PI * 2) / 10)
+                poly.draw()
+            } else if (p.subtype == 3) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 6, 0, 0, -((time) * Math.PI * 2) / 10)
+                poly.draw()
+            }
+
+                            }else{
+                        if (p.subtype == 1) {
+                canvas_context.arc(p.sx, p.sy, (radius + p.z) / .8, 0, Math.PI * 2);
+            } else if (p.subtype == 2) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 3, 0, 0, ((time) * Math.PI * 2) / 10)
+                poly.draw()
+            } else if (p.subtype == 3) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 6, 0, 0, -((time) * Math.PI * 2) / 10)
+                poly.draw()
+            }
+        }
+
+                        // }
+                    }else{
+                        if (p.subtype == 1) {
+                canvas_context.arc(p.sx, p.sy, (radius + p.z) / .8, 0, Math.PI * 2);
+            } else if (p.subtype == 2) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 3, 0, 0, ((time) * Math.PI * 2) / 10)
+                poly.draw()
+            } else if (p.subtype == 3) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 6, 0, 0, -((time) * Math.PI * 2) / 10)
+                poly.draw()
+            }
+
+
+                    }
+                }else{
+                        if (p.subtype == 1) {
+                canvas_context.arc(p.sx, p.sy, (radius + p.z) / .8, 0, Math.PI * 2);
+            } else if (p.subtype == 2) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 3, 0, 0, ((time) * Math.PI * 2) / 10)
+                poly.draw()
+            } else if (p.subtype == 3) {
+                let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 6, 0, 0, -((time) * Math.PI * 2) / 10)
+                poly.draw()
+            }
+
+
+                    }
+
+
+
+
+        }
+        canvas_context.fillStyle = p.color;
+        if (p.blasted >= 1) {
+            canvas_context.fillStyle = blastcolors[p.blasted];
+
+
+        }
+        canvas_context.fill();
+    }
+    }else{
+
+        for (let p of dots2d) {
+        canvas_context.beginPath();
+        if (p.type != 1 && p.type != 2) {
+
+            if (p.blasted >= 1) {
+
+                canvas_context.arc(p.sx, p.sy, ((radius + (p.z / 3)) / 3) + (p.blasted / 3.5), 0, Math.PI * 2);
+            } else if (p.flash == 1) {
+
+                canvas_context.arc(p.sx, p.sy, ((radius + (p.z / 3)) / 3) + 2, 0, Math.PI * 2);
+            } else {
+
+                canvas_context.arc(p.sx, p.sy, (radius + (p.z / 3)) / 4, 0, Math.PI * 2);
+            }
+        } else {
+
 
             if (p.subtype == 1) {
                 canvas_context.arc(p.sx, p.sy, (radius + p.z) / .8, 0, Math.PI * 2);
@@ -3497,6 +3710,7 @@ Flex3DObject.prototype.draw = function(ctx, opts = {}) {
                 let poly = new Polygon(p.sx, p.sy, (radius + (p.z / 2)) / .5, p.color, 6, 0, 0, -((time) * Math.PI * 2) / 10)
                 poly.draw()
             }
+
         }
         canvas_context.fillStyle = p.color;
         if (p.blasted >= 1) {
@@ -3505,6 +3719,8 @@ Flex3DObject.prototype.draw = function(ctx, opts = {}) {
 
         }
         canvas_context.fill();
+    }
+
     }
 };
 
